@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #32312f;
+    font-family: sa;
+    
+}
+
+.table-container{
+    
+    align-items: center;
+}
+
+.heading{
+    font-size: 60px;
+    text-align: center;
+    color: #f1f1f1;
+    margin-bottom: 40px;
+}
+
+.table{
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table thead{
+    background-color: #FF1046;
+}
+
+.table thead tr th{
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.35px;
+    color: #ffffff;
+    opacity: 1;
+    padding: 12px;
+    vertical-align: top;
+    border: 1px solid #dee2e685;
+}
+
+.table tbody tr td{
+    font-size: 20px;
+    letter-spacing: 0.35px;
+    font-weight: normal;
+    color: #f1f1f1;
+    background-color: #3c3f44;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #dee2e685;
+}
+
+.table tbody tr td .btn{
+    
+    width: 130px;
+    text-decoration: none;
+    line-height: 35px;
+    display: inline-block;
+    background-color: #FF1046;
+    font-weight: medium;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: midium;
+    user-select: none;
+    border: 1px solid white;
+    font-size: 14px;
+    opacity: 1;
+}
+
+.table tbody tr td .btn:hover{
+    background-color: #000;
+}
+
+.logout{
+    display: inline-block;
+    padding:10px 35px;
+    font-size: 20px;
+    margin-top: 10px;
+    background-color: #FF1046;
+    color:#fff;
+    font-weight: 600;
+    font-family: sa;
+    margin: 20px;
+    border: 2px solid white;
+    
+ }
+
+ .logout-container{
+    text-align: right;
+   }
+ 
+.logout:hover{
+    background-color: #000;
+ }
+
+.button{
+    display: inline-block;
+    padding:10px 35px;
+    font-size: 20px;
+    margin-top: 10px;
+    background-color: #FF1046;
+    color:#fff;
+    font-weight: 600;
+    font-family: sa;
+    text-align: center;
+    margin: 20px;
+    border: 2px solid white;
+    
+    
+   }
+
+   .button-container{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+   }
+
+ .button:hover{
+    background-color: #000;
+ }

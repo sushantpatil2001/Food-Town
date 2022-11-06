@@ -1,0 +1,98 @@
+# Requirements / UseCase 
+
+Login Page 
+
+					-------> Customer
+Roles 		-------> Waiter 
+					-------> Cashier
+
+
+CUSTOMER -- username is the table number here. 
+
+1. The User can
+		a. Check the whole Menu with Prices
+		b. Add the Items to order (Order is a state/Variable. Function which triggers is AddToOrder)
+		c. Place Order
+		d. Ask for Bill
+
+	A. The Menu Component:		
+		# It will display all the food Items Name, Images, Description and Price 	
+		# Big Button which says Welcome to XYZ restaurant Mr Z. and a button: Open Menu   (can be ignored -- directly show menu)
+		--> sidebar with all categories and right side has menu. 
+
+	B. ADD TO ORDER
+		--> Each Item has a counter which is default set to 0. once incremented a function is called which will add the item from menu Collection to tables Collection. If item is already present in table Collection then it will update it. decrement function updates and checks if count == 0 if true it will remove the item from tables Collection.
+		# After confirming all order go to AllOrders / Cart and there cross check the details and click place order button. 
+
+	C. PLACE ORDER
+		On clicking this place order button the New order will be updated or added(first time)in the Tables Collection.
+		Corresponding changes in Waiter Dashboard.(Maybe a notification when a new order is placed.)
+
+	D.	Ask for Bill:
+		There is a Ask for bill button-- first warns Do u wish to confirm you are full and want to Ask for Bill? Yes -->shows the page (Bill type of page containiing all details for confirming the details). it has button procced-- on click--> enter details for payment page. (pay button)--> [here next page will show simple MCQ option which say either payment done or payment failed] -->if payment successful -->thankyou page. (the database actions will take place after payment is complete)																							-->if payment failed go back tp enter detaols for payment.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+MONGO DB STRUCTURE:
+
+Each Table is called  a Collection in Mongo DB
+We will be having 3	collections -- Menu , Table (can be a state as well ---can get easier with states),Orders.
+
+1.MENU COLLECTION:
+		~ ItemID
+		~ ItemName
+		~ Description
+		~ Image
+		~ Category
+		~ Price
+		~ Out-of-Stock
+
+
+2. TABLES COLLECCTION -- { can use states for better state management. }
+		~ tableNumber
+		~ CustomerName
+		~ Menu-/-Order-Placed  <-- this is the list of Items the customer has placed order.
+		~ isVacant - default:TRUE  <-- Occupied when the table is occupied.
+
+	
+Working: Whenever the WAITER (more details ahead) selects a table and enters the customer name, a new entry will be created here , it contains array of Menu-/-Order-placed. This array will get updated every time order is placed. once the customer clicks ask for bill all the details will then be added to the collection called orders.  
+
+3. ORDERS COLLECTION
+		~ Order number
+		~ Table number
+		~ customer Name 
+		~ Array of Particulars -- contains all the items ordered [{}{}{}]
+		~ payment details
+		~ Bill approved status  <- this is updated by Cashier(more details ahead)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+WAITER  
+
+The waiter view has 2 Responsibilities: 
+
+1. Keep a track of all the Orders.
+2. Keep A track of all Tables. -- 		The tables are represnted as small divs.  whenever someone enters the restaurant and sits on table the waiter will select that table divison and mark it as occupied (default table status is empty). Here only the Waiter will set the Customers Name.  -- all operations by cashier are on Tables Collection
+
+
+
+
+CASHIER COLLECTION: 
+He can also see all orders and tables but here the details are from Order Table -- which means onlt those ORDERs which ask for Bill. -- from Orders collection
+He will be able to see only those orders with billApproved as False.
+			~ TableNo
+			~ Particulars	
+			~ Amount
+			~ Payment-Status  <-- if payment successful this is Paid else Failed Default is Unpaid
+			~ Bill Approved <- Cashier can change this using drop down - default is PENDING. Cashier can check mark/ choose as Approved
+
+			once approved then the entry from tables is updated against table number. Table status = vacant and menu/orderpalced arrray becomes null. and customer name blank
+
+
+If he wants to see all active tables he can see that too using SeeAllTables. details here are from Tables Collection.
+same as cashier view. 
+
+
